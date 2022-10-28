@@ -1,6 +1,5 @@
 import * as reference from "reference";
-import * as submission from "./submission.wasm"
-import * as utility from "./utility";
+import * as submission from "submission"
 
 const REPEAT = 5;
 
@@ -8,19 +7,9 @@ const REPEAT = 5;
 // point_arr: a js array of points
 // scalar_arr: a js array of scalars
 function submission_compute_msm(point_arr, scalar_arr) {
-  let size = scalar_arr.length
-  const wasm_buffer = new Uint8Array(submission.mem.buffer);
-  const data_ptr = 1110024;
-  let res_ptr = data_ptr + 32 * size + 48 * 2 * size;
-  utility.load_to_wasm(wasm_buffer, data_ptr, scalar_arr, point_arr, size);
-  utility.to_mont(size, data_ptr);
-  submission.g1m_zero(res_ptr);
-  submission.g1m_multiexp(data_ptr, data_ptr + 32 * size, size, 8, res_ptr);
-  submission.g1m_affine(res_ptr, res_ptr);
-  submission.f1m_fromMontgomery(res_ptr, res_ptr);
-  submission.f1m_fromMontgomery(res_ptr + 48, res_ptr + 48);
-  submission.f1m_fromMontgomery(res_ptr + 96, res_ptr + 96);
-  return [wasm_buffer.slice(res_ptr, res_ptr + 48), wasm_buffer.slice(res_ptr + 48, res_ptr + 96), false]
+  const points = submission.PointVectorInput.fromJsArray(point_arr);
+  const scalars = submission.ScalarVectorInput.fromJsArray(scalar_arr);
+  return submission.compute_msm(points, scalars).toJsArray();
 }
 
 /*********************************************************************************************************

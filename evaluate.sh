@@ -3,11 +3,7 @@ cd reference
 wasm-pack build --release
 cd ..
 
-# Compiles submission into a `.wasm` module
-# Feel free to change
-cd submission
-cp submission.wasm ../www
-cd ..
+# No need to copy submission anywhere.
 
 # Evaluation
 cd ./www

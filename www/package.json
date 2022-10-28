@@ -28,7 +28,8 @@
   "homepage": "https://github.com/rustwasm/create-wasm-app#readme",
   "dependencies": {
     "big-integer": "^1.6.51",
-    "reference": "file:../reference/pkg"
+    "reference": "file:../reference/pkg",
+    "submission": "file:../submission/pkg"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^5.0.0",
