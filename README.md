@@ -21,4 +21,4 @@ approach, can be found in the [snarkify-zprize repository](https://github.com/na
 
 As with the origonal test harness, running `./evaluate.sh` will start a web server for a page
 including both reference and submission. Pointing a browser to this server will automatically run
-the benchamrks on a randomized input.
+the benchamrks on a randomized inputs.
